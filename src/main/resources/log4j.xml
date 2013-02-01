@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration PUBLIC "-//APACHE//DTD LOG4J 1.2//EN" "log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+
+    <!-- Appenders -->
+    <appender name="stdout" class="org.apache.log4j.ConsoleAppender">
+        <layout class="org.apache.log4j.PatternLayout">
+            <param 
+                name="ConversionPattern" 
+                value="%d{HH:mm:ss:SSS} | %t | %m%n"/>
+        </layout>      
+    </appender>
+    
+    <appender name="logfile" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="File" value="/opt/demos/log/jersey-auditor.log"/>
+        <param name="DatePattern" value="'.'yyyy-MM-dd"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param 
+                name="ConversionPattern" 
+                value="%d{HH:mm:ss:SSS} | %t | %m%n"/>
+        </layout>      
+    </appender>
+	
+	<!-- Application Loggers -->
+	<logger name="ws.cogito.governance">
+		<level value="debug" />
+	</logger>
+	
+	<!-- 3rdparty Loggers -->
+	<logger name="org.springframework">
+		<level value="error" />
+	</logger>
+
+    <category name="org.apache">
+        <priority value="error" />
+    </category>	
+
+	<!-- Root Logger -->
+    <root>
+        <priority value="error" />
+        <appender-ref ref="stdout"/>
+        <appender-ref ref="logfile"/>
+    </root>
+	
+</log4j:configuration>
